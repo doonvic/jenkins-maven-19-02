@@ -1,4 +1,4 @@
-java 11 + maven 3.8.6 + jenkins
+AWS-Linus + java 11 + maven 3.8.6 + jenkins
 ===============================
 1. Install java11
 ==> sudo amazon-linux-extras install java-openjdk11
@@ -42,3 +42,81 @@ sudo yum install jenkins
 sudo systemctl daemon-reload
 service jenkins start
 systemctl enable jenkins
+
+
+====================================================================
+Ubuntu-Linux + java 11 + maven 3.8.7 + jenkins
+====================================================================
+1. Update the system repository with:
+==> sudo apt update
+
+2. Install the latest version of OpenJDK by using:
+==> sudo apt default-jdk
+==> Type Y and press Enter when prompted to confirm the installation.
+Verify the installation by checking the current version of OpenJDK:
+==> java -version
+
+
+====================================================================
+
+3. Download and Install Maven
+Download the Maven install file in the /tmp directory:
+==> wget https://dlcdn.apache.org/maven/maven-3/3.8.7/binaries/apache-maven-3.8.7-bin.tar.gz -P /tmp
+Once the download is complete, extract the installation file in the /opt directory:
+==> sudo tar xf /tmp/apache-maven-*.tar.gz -C /opt
+Create a symbolic link called maven leading to the Maven installation directory:
+==> sudo ln -s /opt/apache-maven-3.8.7 /opt/maven
+
+====================================================================
+
+4. Set Up Environment Variables
+Use the Nano text editor to create and open the maven.sh script file in the /etc/profile.d/ directory:
+==> sudo nano /etc/profile.d/maven.sh
+Add the following lines to the maven.sh file (find the path to the install versions of Java-11-* and Maven and setup their HOME variable):
+==>
+        export JAVA_HOME=/usr/lib/java-11-openjdk-amd64
+        export M2_HOME=/opt/maven
+        export MAVEN_HOME=/opt/maven
+        export PATH=${M2_HOME}/bin:${PATH}
+Press Ctrl + X, then type Y and press Enter to save changes to maven.sh.
+Make the maven.sh file executable using the chmod command:
+==> sudo chmod +x /etc/profile.d/maven.sh
+Execute the maven.sh script file with the source command to set up the new environment variables:
+==> source /etc/profile.d/maven.sh
+Verify Maven Installation:
+==> mvn -version
+
+====================================================================
+
+5.  Install Jenkins for java11
+==>
+curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo tee \
+  /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+==>
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+==> sudo apt-get update
+==> sudo apt-get install jenkins
+
+Enable the Jenkins service to start at boot with the command:
+==> sudo systemctl enable jenkins
+start the Jenkins service with the command:
+==> sudo systemctl start jenkins
+check the status of the Jenkins service using the command:
+==> sudo systemctl status jenkins
+
+====================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
