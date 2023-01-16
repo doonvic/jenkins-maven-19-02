@@ -1,4 +1,4 @@
-AWS-Linus + java 11 + maven 3.8.6 + jenkins
+AWS-Linux + java 11 + maven 3.8.6 + jenkins
 ===============================
 1. Install java11
 ==> sudo amazon-linux-extras install java-openjdk11
@@ -74,7 +74,7 @@ Use the Nano text editor to create and open the maven.sh script file in the /etc
 ==> sudo nano /etc/profile.d/maven.sh
 Add the following lines to the maven.sh file (find the path to the install versions of Java-11-* and Maven and setup their HOME variable):
 ==>
-        export JAVA_HOME=/usr/lib/java-11-openjdk-amd64
+        export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
         export M2_HOME=/opt/maven
         export MAVEN_HOME=/opt/maven
         export PATH=${M2_HOME}/bin:${PATH}
